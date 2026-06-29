@@ -19,7 +19,7 @@ loginForm.addEventListener('submit', function(event) {
         const rol = document.querySelector('input[name="rol"]:checked');
         
         // Limpiar mensaje de error previo
-        errorMessage.classList.remove('show');
+        errorMessage.classList.add('d-none');
         errorText.innerHTML = '';
         
         // Validar que ningún campo esté vacío
@@ -48,13 +48,12 @@ loginForm.addEventListener('submit', function(event) {
         });
         
         // Aquí iría la lógica para enviar al servidor
-        // Por ahora, mostramos un mensaje de éxito en la consola
-        alert(`Iniciando sesión como ${rol.value}...`);
+        alert(`✓ Iniciando sesión como ${rol.value}...`);
         
     } catch (error) {
         // Mostrar mensaje de error en el DOM
         errorText.innerHTML = error.message;
-        errorMessage.classList.add('show');
+        errorMessage.classList.remove('d-none');
         
         // Log en consola para debugging
         console.error('Error de validación:', error.message);
@@ -63,13 +62,13 @@ loginForm.addEventListener('submit', function(event) {
 
 // Limpiar mensaje de error cuando el usuario comienza a escribir
 emailInput.addEventListener('input', function() {
-    if (errorMessage.classList.contains('show')) {
-        errorMessage.classList.remove('show');
+    if (!errorMessage.classList.contains('d-none')) {
+        errorMessage.classList.add('d-none');
     }
 });
 
 passwordInput.addEventListener('input', function() {
-    if (errorMessage.classList.contains('show')) {
-        errorMessage.classList.remove('show');
+    if (!errorMessage.classList.contains('d-none')) {
+        errorMessage.classList.add('d-none');
     }
 });
