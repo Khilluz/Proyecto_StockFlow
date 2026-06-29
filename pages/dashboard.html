@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockFlow - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+    <!-- Navbar Superior -->
+    <nav>
+        <div class="nav-container">
+            <!-- Logo -->
+            <div class="nav-logo">
+                <h1>StockFlow</h1>
+            </div>
+
+            <!-- Botón Hamburguesa (Visible solo en móviles) -->
+            <button
+                id="menuBtn"
+                class="menu-btn"
+                aria-label="Abrir menú"
+            >
+                <svg
+                    id="menuIcon"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Menú Móvil (Oculto por defecto) -->
+        <div id="mobileMenu" class="mobile-menu">
+            <a href="inventory.html">📦 Inventario</a>
+            <a href="sales.html">💰 Ventas</a>
+            <a href="bills.html">📋 Gastos</a>
+            <a href="reports.html">📊 Reportes</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <!-- Sidebar (Visible solo en pantallas md+) -->
+        <aside>
+            <nav class="sidebar-nav">
+                <a href="inventory.html">
+                    <span>📦</span>
+                    <span>Inventario</span>
+                </a>
+                <a href="sales.html">
+                    <span>💰</span>
+                    <span>Ventas</span>
+                </a>
+                <a href="bills.html">
+                    <span>📋</span>
+                    <span>Gastos</span>
+                </a>
+                <a href="reports.html">
+                    <span>📊</span>
+                    <span>Reportes</span>
+                </a>
+            </nav>
+
+            <!-- Pie de Sidebar -->
+            <div class="sidebar-footer">
+                <button class="logout-btn">
+                    🚪 Cerrar Sesión
+                </button>
+            </div>
+        </aside>
+
+        <!-- Contenido Principal -->
+        <main>
+            <div class="content-wrapper">
+                <!-- Encabezado -->
+                <div class="content-header" style="margin-bottom: 2rem;">
+                    <h2>Panel de Control</h2>
+                    <p>Bienvenido a tu dashboard de StockFlow</p>
+                </div>
+
+                <!-- Grid de Tarjetas de Indicadores -->
+                <div class="cards-grid">
+                    <!-- Tarjeta 1: Ventas del Día -->
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-info">
+                                <p>Ventas del Día</p>
+                                <p>$4,250.50</p>
+                            </div>
+                            <div class="card-icon green">
+                                💰
+                            </div>
+                        </div>
+                        <p class="card-footer green">📈 +12% respecto a ayer</p>
+                    </div>
+
+                    <!-- Tarjeta 2: Stock Bajo -->
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-info">
+                                <p>Productos con Stock Bajo</p>
+                                <p>8</p>
+                            </div>
+                            <div class="card-icon yellow">
+                                ⚠️
+                            </div>
+                        </div>
+                        <p class="card-footer yellow">Requieren reposición inmediata</p>
+                    </div>
+
+                    <!-- Tarjeta 3: Inventario Total -->
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-info">
+                                <p>Valor Inventario</p>
+                                <p>$28,400</p>
+                            </div>
+                            <div class="card-icon blue">
+                                📦
+                            </div>
+                        </div>
+                        <p class="card-footer blue">Total en bodega</p>
+                    </div>
+
+                    <!-- Tarjeta 4: Órdenes Pendientes -->
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-info">
+                                <p>Órdenes Pendientes</p>
+                                <p>12</p>
+                            </div>
+                            <div class="card-icon purple">
+                                📋
+                            </div>
+                        </div>
+                        <p class="card-footer purple">Esperando procesamiento</p>
+                    </div>
+                </div>
+
+                <!-- Sección Adicional: Actividad Reciente -->
+                <div class="activity-section">
+                    <h3>Actividad Reciente</h3>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-badge success">✓</div>
+                            <div class="activity-info">
+                                <p>Venta registrada</p>
+                                <p>Hace 2 horas - $325.00</p>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-badge warning">!</div>
+                            <div class="activity-info">
+                                <p>Stock bajo detectado</p>
+                                <p>Hace 4 horas - Producto: Laptop</p>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-badge info">+</div>
+                            <div class="activity-info">
+                                <p>Inventario actualizado</p>
+                                <p>Hace 6 horas - 15 artículos agregados</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Script -->
+    <script src="../assets/js/dashboard.js"></script>
+</body>
+</html>
