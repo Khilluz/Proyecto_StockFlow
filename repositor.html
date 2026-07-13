@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StockFlow - Repositor</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="shell">
+      <div class="panel">
+        <header class="page-header">
+          <div class="brand">Ingreso de Mercadería</div>
+          <nav>
+            <a href="index.html">Login</a>
+            <a href="dashboard_admin.html">Admin</a>
+            <a href="vendedor.html">Vendedor</a>
+            <a href="repositor.html">Repositor</a>
+          </nav>
+        </header>
+
+        <form id="repositorForm" class="form-grid">
+          <div>
+            <label for="buscadorProducto">Buscar producto</label>
+            <input id="buscadorProducto" name="buscadorProducto" type="text" placeholder="ID o nombre" />
+          </div>
+          <div>
+            <label for="cantidadRecibida">Unidades recibidas</label>
+            <input id="cantidadRecibida" name="cantidadRecibida" type="number" min="1" value="1" />
+          </div>
+          <button class="btn-primary" id="actualizarStockBtn" type="button">Actualizar Existencias</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

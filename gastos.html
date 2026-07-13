@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StockFlow | Gastos</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html">StockFlow</a>
+        <nav class="nav-links" aria-label="Navegación de gastos">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="inventario.html">Inventario</a>
+          <a href="vendedor.html">Vendedor</a>
+          <a href="gastos.html">Gastos</a>
+          <a href="reportes.html">Reportes</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="card" aria-labelledby="gastos-title">
+        <h1 id="gastos-title">Registro de gastos</h1>
+        <form id="gastoForm" class="form-grid" novalidate>
+          <label for="categoriaGasto">Categoría
+            <input id="categoriaGasto" name="categoriaGasto" type="text" required />
+          </label>
+          <label for="descripcionGasto">Descripción
+            <input id="descripcionGasto" name="descripcionGasto" type="text" required />
+          </label>
+          <label for="montoGasto">Monto
+            <input id="montoGasto" name="montoGasto" type="number" step="0.01" required />
+          </label>
+          <label for="fechaGasto">Fecha
+            <input id="fechaGasto" name="fechaGasto" type="date" required />
+          </label>
+          <button class="btn btn-primary" type="submit">Guardar gasto</button>
+        </form>
+      </section>
+
+      <section class="card" aria-labelledby="gastos-listado-title">
+        <h2 id="gastos-listado-title">Listado de gastos</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Categoría</th>
+                <th>Descripción</th>
+                <th>Monto</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

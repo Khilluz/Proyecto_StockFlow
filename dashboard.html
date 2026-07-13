@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StockFlow | Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html">StockFlow</a>
+        <nav class="nav-links" aria-label="Navegación del dashboard">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="inventario.html">Inventario</a>
+          <a href="vendedor.html">Vendedor</a>
+          <a href="gastos.html">Gastos</a>
+          <a href="reportes.html">Reportes</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="card" aria-labelledby="dashboard-title">
+        <div class="metrics-grid">
+          <article class="metric-box">
+            <h3>Ventas totales</h3>
+            <p>$24.500</p>
+          </article>
+          <article class="metric-box">
+            <h3>Productos</h3>
+            <p>128</p>
+          </article>
+          <article class="metric-box">
+            <h3>Gastos</h3>
+            <p>$3.120</p>
+          </article>
+          <article class="metric-box">
+            <h3>Margen</h3>
+            <p>18.4%</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="resumen-title">
+        <h2 id="resumen-title">Resumen ejecutivo</h2>
+        <div class="grid-2">
+          <div class="card" style="margin-top:0;">
+            <h3>Estado operativo</h3>
+            <p>El inventario presenta 3 alertas críticas y 2 productos con margen por debajo del umbral.</p>
+          </div>
+          <div class="card" style="margin-top:0;">
+            <h3>Actividad reciente</h3>
+            <p>Última sincronización: 08:45 hs. Se registraron 6 ventas y 2 ingresos de mercadería.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

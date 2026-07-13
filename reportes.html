@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StockFlow | Reportes</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html">StockFlow</a>
+        <nav class="nav-links" aria-label="Navegación de reportes">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="inventario.html">Inventario</a>
+          <a href="vendedor.html">Vendedor</a>
+          <a href="gastos.html">Gastos</a>
+          <a href="reportes.html">Reportes</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="card" aria-labelledby="reportes-title">
+        <h1 id="reportes-title">Generación de reportes</h1>
+        <form class="form-grid" novalidate>
+          <label for="fechaInicio">Fecha inicio
+            <input id="fechaInicio" name="fechaInicio" type="date" />
+          </label>
+          <label for="fechaFin">Fecha fin
+            <input id="fechaFin" name="fechaFin" type="date" />
+          </label>
+          <label for="tipoReporte">Tipo de reporte
+            <select id="tipoReporte" name="tipoReporte">
+              <option value="ventas">Ventas</option>
+              <option value="stock">Stock</option>
+              <option value="gastos">Gastos</option>
+            </select>
+          </label>
+          <button class="btn btn-primary" type="button">Generar</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

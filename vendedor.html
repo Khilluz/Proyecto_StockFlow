@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StockFlow | Vendedor</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html">StockFlow</a>
+        <nav class="nav-links" aria-label="Navegación de ventas">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="inventario.html">Inventario</a>
+          <a href="vendedor.html">Vendedor</a>
+          <a href="gastos.html">Gastos</a>
+          <a href="reportes.html">Reportes</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="card" aria-labelledby="venta-title">
+        <h1 id="venta-title">Caja registradora</h1>
+        <form id="saleForm" class="form-grid" novalidate>
+          <div class="grid-2">
+            <label for="productoSelect">Producto
+              <select id="productoSelect" name="productoSelect">
+                <option value="Cafe Premium">Café Premium</option>
+                <option value="Pan artesanal">Pan artesanal</option>
+                <option value="Leche entera">Leche entera</option>
+              </select>
+            </label>
+            <label for="cantidad">Cantidad
+              <input id="cantidad" name="cantidad" type="number" min="1" value="1" />
+            </label>
+          </div>
+          <label for="canalVenta">Canal de venta
+            <select id="canalVenta" name="canalVenta">
+              <option value="Presencial">Presencial</option>
+              <option value="Delivery">Delivery</option>
+              <option value="Online">Online</option>
+            </select>
+          </label>
+          <button class="btn btn-secondary" type="submit">Agregar a la venta</button>
+        </form>
+        <div id="saleMessage" class="error-message" aria-live="polite"></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio unitario</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody id="itemsBody"></tbody>
+          </table>
+        </div>
+        <div id="totalDisplay" class="total-box">Total Calculado: $0.00</div>
+        <button id="confirmSaleBtn" class="btn btn-primary" type="button" style="margin-top: 1rem;">Confirmar Venta</button>
+      </section>
+    </main>
+  </body>
+</html>

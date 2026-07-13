@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StockFlow | Inventario</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html">StockFlow</a>
+        <nav class="nav-links" aria-label="Navegación de inventario">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="inventario.html">Inventario</a>
+          <a href="vendedor.html">Vendedor</a>
+          <a href="gastos.html">Gastos</a>
+          <a href="reportes.html">Reportes</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="card" aria-labelledby="inventario-title">
+        <h1 id="inventario-title">Alta de producto</h1>
+        <form id="inventarioForm" class="form-grid" novalidate>
+          <div class="grid-2">
+            <label for="nombre">Nombre
+              <input id="nombre" name="nombre" type="text" required />
+            </label>
+            <label for="categoria">Categoría
+              <input id="categoria" name="categoria" type="text" required />
+            </label>
+          </div>
+          <div class="grid-2">
+            <label for="precioCosto">Precio costo
+              <input id="precioCosto" name="precioCosto" type="number" step="0.01" required />
+            </label>
+            <label for="precioVenta">Precio venta
+              <input id="precioVenta" name="precioVenta" type="number" step="0.01" required />
+            </label>
+          </div>
+          <div class="grid-2">
+            <label for="unidadMedida">Unidad de medida
+              <input id="unidadMedida" name="unidadMedida" type="text" required />
+            </label>
+            <label for="stockActual">Stock actual
+              <input id="stockActual" name="stockActual" type="number" required />
+            </label>
+          </div>
+          <label for="stockMinimo">Stock mínimo
+            <input id="stockMinimo" name="stockMinimo" type="number" required />
+          </label>
+          <p id="inventoryError" class="error-message" aria-live="polite"></p>
+          <button class="btn btn-primary" type="submit">Guardar producto</button>
+        </form>
+      </section>
+
+      <section class="card" aria-labelledby="alertas-title">
+        <h2 id="alertas-title">Alertas de stock bajo</h2>
+        <ul id="alertList" class="alert-list">
+          <li>Producto A: stock por debajo del mínimo</li>
+          <li>Producto C: stock crítico</li>
+        </ul>
+      </section>
+
+      <section class="card" aria-labelledby="productos-title">
+        <h2 id="productos-title">Listado de productos</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Precio costo</th>
+                <th>Precio venta</th>
+                <th>Stock</th>
+                <th>Stock mínimo</th>
+              </tr>
+            </thead>
+            <tbody id="productosBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
