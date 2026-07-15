@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+
+      <---  Esto actualmente no tiene uso y posiblemente (se vuelva) a borrar---/>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StockFlow - Panel Administrador</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="shell">
+      <div class="panel">
+        <header class="page-header">
+          <div class="brand">StockFlow Admin</div>
+          <nav>
+            <a href="index.html">Login</a>
+            <a href="dashboard_admin.html">Admin</a>
+            <a href="vendedor.html">Vendedor</a>
+            <a href="repositor.html">Repositor</a>
+          </nav>
+        </header>
+
+      
+
+        <section class="metrics-grid">
+          <article class="metric-card">
+            <h3>Ventas totales</h3>
+            <div class="value">$12.450</div>
+          </article>
+          <article class="metric-card">
+            <h3>Productos registrados</h3>
+            <div class="value">128</div>
+          </article>
+        </section>
+
+        <section class="alert-card" id="alertaStock">
+          <h3>Alertas de Stock</h3>
+          <ul>
+            <li>Producto A: stock bajo (2 unidades)</li>
+            <li>Producto C: por debajo del umbral mínimo</li>
+          </ul>
+        </section>
+
+        <section class="table-card" style="margin-top: 20px;">
+          <h3>Gestión de productos</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Imagen</th>
+                <th>Umbral</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1001</td>
+                <td>Café Premium</td>
+                <td>$12.50</td>
+                <td>4</td>
+                <td>img</td>
+                <td>5</td>
+                <td><button class="btn-secondary" type="button" disabled>Editar</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

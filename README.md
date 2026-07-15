@@ -16,6 +16,8 @@ Centralizar la información del negocio en una interfaz sencilla, accesible y fu
 
 ## Estructura del proyecto
 
+Actualmente no se esta utilizando esta organizacion pero quedara planteado para posteriores entregas
+
 - assets/: recursos estáticos y scripts de la interfaz.
 - css/: estilos visuales de las páginas.
 - pages/: vistas principales del sistema.

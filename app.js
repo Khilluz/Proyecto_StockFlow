@@ -32,11 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
       errorBox.textContent = '';
       console.log(`Placeholder: loginUsuario() -> credenciales válidas para ${role}.`);
       if (role === 'Administrador') {
-        window.location.href = 'dashboard.html';
+        window.location.href = 'Pages/dashboard.html';
       } else if (role === 'Vendedor') {
-        window.location.href = 'vendedor.html';
+        window.location.href = 'Pages/vendedor.html';
       } else {
-        window.location.href = 'inventario.html';
+        window.location.href = 'Pages/inventario.html';
       }
     } catch (error) {
       if (errorBox) {
@@ -66,9 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const cantidad = Number(quantityInput?.value || 1);
     const canal = canalVenta?.value || 'Presencial';
     const precios = {
-      'Cafe Premium': 12.5,
-      'Pan artesanal': 3.2,
-      'Leche entera': 5.0
+      'Producto A': 12.5,
+      'Producto B': 3.2,
+      'Producto C': 5.0
     };
 
     let total = 0;
