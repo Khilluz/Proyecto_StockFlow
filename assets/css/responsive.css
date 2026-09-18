@@ -1,0 +1,130 @@
+/* Base mobile: la interfaz parte de una columna y touch targets amplios. */
+body { overflow-x: hidden; }
+.sidebar { height: 100dvh; transform: translateX(-100%); transition: transform .25s ease; }
+.menu-open .sidebar { transform: translateX(0); }
+.sidebar-backdrop { background: rgba(10, 35, 32, .45); inset: 0; position: fixed; z-index: 20; }
+.menu-open .sidebar-backdrop { display: block; }
+.menu-toggle { align-items: center; background: var(--teal); border: 0; border-radius: 8px; display: flex; flex-direction: column; gap: 4px; height: 44px; justify-content: center; position: fixed; right: 1rem; top: .85rem; width: 44px; z-index: 40; }
+.menu-toggle span { background: #fff; border-radius: 2px; height: 2px; width: 19px; }
+.app-shell { margin-left: 0; }
+.topbar { min-height: 72px; padding: 1rem 4.5rem 1rem 1rem; }
+.main-content { padding: 1.5rem 1rem; }
+.app-footer { padding: 0 1rem 1.5rem; }
+.welcome-row, .page-heading, .alert-panel { align-items: flex-start; flex-direction: column; gap: 1rem; }
+.metrics-grid, .content-grid, .report-cards { grid-template-columns: 1fr; }
+.metrics-grid { gap: .75rem; }
+.metric-card { padding: 1rem; }
+.metric-card strong { font-size: 1.4rem; }
+.panel { padding: 1rem; }
+.form-row, .report-panel .form-row { grid-template-columns: 1fr; }
+.alert-items { align-items: flex-start; flex-direction: column; gap: .8rem; }
+.table-wrap { max-width: 100%; overflow-x: auto; }
+.content-grid > *, .inventory-layout > *, .sale-layout > *, .expense-layout > *, .report-cards > *, .panel, .table-wrap { min-width: 0; }
+.table-wrap { width: 100%; }
+.form-grid, .form-row, .form-grid label, .form-row label, .form-grid input, .form-grid select, .form-row input, .form-row select { max-width: 100%; min-width: 0; }
+.cart-panel .table-wrap { display: block; overflow-x: auto; }
+th, td { min-width: 90px; }
+.table-tools { width: 100%; }
+.table-tools input { min-width: 0; width: 100%; }
+.panel-heading { gap: .75rem; flex-wrap: wrap; }
+.login-page { display: block; }
+.login-shell { display: block; min-height: 100dvh; }
+.login-card { padding: 2rem 1.25rem; }
+.login-aside { display: none; }
+.btn, input, select { min-height: 44px; }
+.inline-form { display: inline; }
+.table-action { background: none; border: 0; color: var(--teal-dark); font-size: .72rem; font-weight: 700; padding: .45rem .25rem; }
+.table-action.danger { color: #c65c52; }
+.confirm-sale-form { display: grid; gap: .75rem; }
+.confirm-sale-form label { color: var(--ink); display: grid; font-size: .76rem; font-weight: 700; gap: .4rem; }
+.flash { border-radius: 8px; font-size: .8rem; margin-bottom: 1rem; padding: .8rem 1rem; }
+.flash-success { background: #e7f5ef; color: #168675; }
+.flash-error { background: #fff0ed; color: #c65c52; }
+.empty-state { color: var(--muted); font-size: .8rem; padding: 1rem 0; }
+.report-total { font-family: 'Space Grotesk'; font-size: 1.1rem; }
+@media (min-width: 576px) {
+  .main-content { padding: 2rem 1.5rem; }
+  .app-footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .metrics-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .report-panel .form-row { grid-template-columns: 1fr; }
+  .report-panel .form-row button { grid-column: auto; }
+}
+.app-page, .login-page { background: #fff1d8; }
+.topbar { align-items: center; background: linear-gradient(110deg, #57c875, #08747d); border: 0; height: 124px; min-height: 124px; padding: 1.5rem 1.25rem; }
+.topbar > div { display: none; }
+.mobile-brand { color: #fff; display: block; font-family: 'DM Sans', sans-serif; font-size: 2rem; font-weight: 500; }
+.menu-toggle { background: transparent; border-radius: 0; right: 1rem; top: 2.35rem; }
+.sidebar { background: linear-gradient(115deg, #5ac97a, #06747c); padding: 1.5rem 1.25rem; width: min(282px, 78vw); }
+.sidebar .brand, .sidebar-label, .sidebar-footer { display: none; }
+.sidebar-nav { margin-top: 5rem; }
+.sidebar-nav a { color: #fff; font-size: 1.25rem; padding: .8rem .75rem; }
+.main-content { padding: 3.8rem 1.4rem 2rem; }
+.panel, .metric-card { border: 0; border-radius: 28px; box-shadow: 0 5px 9px rgba(34, 45, 45, .2); }
+.metrics-grid { gap: 1.1rem; }
+.metric-card { background: linear-gradient(120deg, #52c676, #08777d); color: #fff; padding: 1.2rem 1.15rem; }
+.metric-card .metric-label, .metric-card strong, .metric-card small { color: #fff; }
+.metric-card strong { font-size: 1.8rem; }
+.welcome-row .btn, .page-heading .btn { align-self: stretch; }
+.page-heading h1, .welcome-row h1 { font-size: 1.8rem; }
+.form-panel, .table-panel, .report-panel, .cart-panel, .activity-panel, .alert-panel { border-radius: 28px; }
+.panel-heading { border-bottom: 1px solid #222; padding-bottom: .8rem; }
+.panel-heading h2 { font-size: 1.5rem; }
+.form-grid input, .form-grid select, .form-row input, .form-row select { background: #fff; border-color: #aaa; border-radius: 9px; }
+.btn { border-radius: 18px; min-height: 48px; }
+.table-wrap table { min-width: 600px; }
+.app-footer { display: none; }
+.login-shell { padding-top: 124px; position: relative; }
+.login-shell::before { background: linear-gradient(110deg, #57c875, #08747d); content: 'StockFlow'; color: #fff; font-size: 2rem; font-weight: 500; left: 0; padding: 2rem 2rem; position: absolute; right: 0; top: 0; }
+.login-card { border-radius: 28px; box-shadow: 0 5px 9px rgba(34, 45, 45, .2); margin: 4rem 1.4rem 0; padding: 2rem 1.25rem; }
+.login-card .login-brand { display: none; }
+.login-card h1 { font-size: 2rem; }
+@media (min-width: 1024px) {
+  .topbar { background: linear-gradient(110deg, #57c875, #08747d); height: auto; min-height: 78px; padding: 1rem 3rem; }
+  .topbar > div { display: block; }
+  .mobile-brand { display: none; }
+  .menu-toggle { background: var(--teal); right: 1rem; top: .85rem; }
+  .sidebar { background: linear-gradient(115deg, #5ac97a, #06747c); padding: 1.75rem 1.1rem; width: 238px; }
+  .sidebar .brand, .sidebar-label, .sidebar-footer { display: flex; }
+  .sidebar-nav { margin-top: 0; }
+  .sidebar-nav a { font-size: .9rem; padding: .75rem .85rem; }
+  .main-content { padding: 2.6rem 3rem; }
+  .panel, .metric-card { border-radius: 12px; }
+  .metric-card { background: #fff; color: var(--ink); padding: 1.35rem; }
+  .metric-card .metric-label { color: var(--muted); }
+  .metric-card strong { color: var(--ink); font-size: 1.75rem; }
+  .metric-card small { color: var(--teal-dark); }
+  .login-shell { padding-top: 0; }
+  .login-shell::before { display: none; }
+  .login-card { border-radius: 0; box-shadow: none; margin: 0; }
+}
+@media (min-width: 768px) {
+  .main-content { padding: 2.4rem 2rem; }
+  .app-footer { padding-left: 2rem; padding-right: 2rem; }
+  .metrics-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .form-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .report-panel .form-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .report-panel .form-row button { grid-column: span 2; }
+  .content-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .inventory-layout, .sale-layout, .expense-layout { grid-template-columns: minmax(260px, .75fr) minmax(0, 1.5fr); }
+  .report-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .report-panel .form-row { grid-template-columns: repeat(3, minmax(0, 1fr)) auto; }
+  .report-panel .form-row button { grid-column: auto; }
+}
+@media (min-width: 1024px) {
+  .sidebar { transform: translateX(0); }
+  .sidebar-backdrop, .menu-toggle { display: none; }
+  .app-shell { margin-left: 238px; }
+  .topbar { padding: 1rem 3rem; }
+  .main-content { padding: 2.6rem 3rem; }
+  .app-footer { padding-left: 3rem; padding-right: 3rem; }
+  .welcome-row, .page-heading { align-items: end; flex-direction: row; }
+  .metrics-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .content-grid { grid-template-columns: minmax(0, 1.65fr) minmax(300px, 1fr); }
+  .inventory-layout { grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr); }
+  .expense-layout { grid-template-columns: minmax(260px, .7fr) minmax(0, 1.5fr); }
+  .login-page { align-items: stretch; display: flex; }
+  .login-shell { display: grid; min-height: 620px; }
+  .login-card { padding: 4rem 4.5rem; }
+  .login-aside { display: block; }
+}
