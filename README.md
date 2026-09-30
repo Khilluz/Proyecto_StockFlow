@@ -14,16 +14,33 @@ Centralizar la información del negocio en una interfaz sencilla, accesible y fu
 - Panel de indicadores con resumen operativo.
 - Vistas organizadas por módulos: inventario, ventas, gastos y reportes.
 
-## Estructura del proyecto
+## Estructura actual
 
-Actualmente no se esta utilizando esta organizacion pero quedara planteado para posteriores entregas
+```text
+├── index.php, dashboard.php, inventario.php, vendedor.php
+├── gastos.php, reportes.php, repositor.php
+├── includes/          # layout, sidebar y footer compartidos
+├── config/            # PDO, sesión, CSRF y autorización
+├── data/              # consultas reutilizables
+├── database/          # esquema y datos iniciales MySQL
+└── assets/css, assets/js
+```
 
-- assets/: recursos estáticos y scripts de la interfaz.
-- css/: estilos visuales de las páginas.
-- pages/: vistas principales del sistema.
-- img/ y icons/: recursos gráficos y de identidad.
+Las pantallas se renderizan con PHP y reutilizan un único layout. Los datos proceden de MySQL mediante PDO y las consultas reutilizables están aisladas en `data/repository.php`. Administrador gestiona inventario y gastos; vendedor gestiona ventas; repositor gestiona inventario y entradas.
 
-## Estado actual
+## Ejecución local
 
-El proyecto presenta la estructura base del sistema con páginas de acceso, panel principal y módulos de navegación listos para ampliar con lógica de negocio y conexión a base de datos.
+Con Laragon o PHP instalado, ejecuta desde la raíz:
+
+```bash
+php -S localhost:8000
+```
+
+Importa `database/database.sql` desde HeidiSQL o ejecútalo desde Laragon. Luego abre `http://localhost:8000/index.php`. La conexión está centralizada en `config/database.php` y acepta `STOCKFLOW_DB_HOST`, `STOCKFLOW_DB_PORT`, `STOCKFLOW_DB_NAME`, `STOCKFLOW_DB_USER` y `STOCKFLOW_DB_PASSWORD`.
+
+Usuarios iniciales:
+
+- `admin@stockflow.local` / `Admin123!`
+- `vendedor@stockflow.local` / `Vendedor123!`
+- `repositor@stockflow.local` / `Repositor123!`
 
