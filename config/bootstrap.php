@@ -1,13 +1,14 @@
 <?php
 
-require_once __DIR__ . '/database.php';
+use StockFlow\Core\CsrfManager;
+use StockFlow\Core\SessionManager;
+use StockFlow\Services\AuthService;
+use StockFlow\DAO\UsuarioDAO;
 
-if (session_status() !== PHP_SESSION_ACTIVE) {
-    session_start([
-        'cookie_httponly' => true,
-        'cookie_samesite' => 'Lax',
-    ]);
-}
+require_once __DIR__ . '/database.php';
+require_once __DIR__ . '/autoload.php';
+
+SessionManager::start();
 
 function e(string|int|float|null $value): string
 {
@@ -16,7 +17,20 @@ function e(string|int|float|null $value): string
 
 function money(float|int $value): string
 {
-    return '$' . number_format((float) $value, 2, ',', '.');
+    $amount = (float) $value;
+    $decimals = $amount === round($amount) ? 0 : 2;
+    return '$' . number_format($amount, $decimals, ',', '.');
+}
+
+function quantity(float|int|string|null $value): string
+{
+    return number_format((int) round((float) $value), 0, ',', '.');
+}
+
+function precise_quantity(float|int|string|null $value): string
+{
+    $formatted = number_format((float) $value, 3, ',', '.');
+    return rtrim(rtrim($formatted, '0'), ',');
 }
 
 function redirect(string $path): never
@@ -27,15 +41,12 @@ function redirect(string $path): never
 
 function csrf_token(): string
 {
-    if (empty($_SESSION['csrf'])) {
-        $_SESSION['csrf'] = bin2hex(random_bytes(32));
-    }
-    return $_SESSION['csrf'];
+    return CsrfManager::token();
 }
 
 function verify_csrf(): void
 {
-    if (!hash_equals($_SESSION['csrf'] ?? '', $_POST['csrf'] ?? '')) {
+    if (!CsrfManager::isValid($_POST['csrf'] ?? null)) {
         http_response_code(419);
         exit('La sesión del formulario expiró. Vuelve a intentarlo.');
     }
@@ -55,7 +66,7 @@ function pull_flash(): ?array
 
 function current_user(): ?array
 {
-    return $_SESSION['user'] ?? null;
+    return AuthService::currentUser();
 }
 
 function require_auth(): array
@@ -63,6 +74,21 @@ function require_auth(): array
     $user = current_user();
     if (!$user) {
         redirect('index.php');
+    }
+    $userId = filter_var($user['id'] ?? null, FILTER_VALIDATE_INT);
+    if (!is_int($userId) || $userId < 1) {
+        SessionManager::destroy();
+        redirect('index.php');
+    }
+    try {
+        if (!(new UsuarioDAO(db()))->isActive($userId)) {
+            SessionManager::destroy();
+            redirect('index.php');
+        }
+    } catch (Throwable $exception) {
+        error_log($exception->getMessage());
+        http_response_code(503);
+        exit('No se pudo validar la sesión. Inténtalo nuevamente.');
     }
     return $user;
 }

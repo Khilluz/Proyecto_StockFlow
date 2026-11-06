@@ -1,7 +1,10 @@
 <?php
+use StockFlow\DAO\UsuarioDAO;
+
 require_once __DIR__ . '/config/bootstrap.php';
 $user = require_role(['Administrador']);
 $pdo = db();
+$userDao = new UsuarioDAO($pdo);
 $error = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -9,35 +12,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $action = $_POST['action'] ?? '';
         if ($action === 'create') {
-            $name = trim($_POST['name'] ?? '');
-            $email = trim($_POST['email'] ?? '');
-            $password = $_POST['password'] ?? '';
-            $roleId = (int) ($_POST['role_id'] ?? 0);
-            if ($name === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($password) < 8 || !$roleId) {
+            $nameInput = $_POST['name'] ?? null;
+            $emailInput = $_POST['email'] ?? null;
+            $password = $_POST['password'] ?? null;
+            $roleId = filter_var($_POST['role_id'] ?? null, FILTER_VALIDATE_INT);
+            if (!is_string($nameInput) || !is_string($emailInput) || !is_string($password)
+                || !is_int($roleId) || $roleId < 1) {
+                throw new InvalidArgumentException('Completa todos los campos del usuario.');
+            }
+            $name = trim($nameInput);
+            $email = strtolower(trim($emailInput));
+            if ($name === '' || mb_strlen($name) > 100 || !filter_var($email, FILTER_VALIDATE_EMAIL)
+                || strlen($password) < 8) {
                 throw new InvalidArgumentException('Completa nombre, email, rol y una contraseña de al menos 8 caracteres.');
             }
-            $statement = $pdo->prepare('INSERT INTO users (role_id, name, email, password_hash) VALUES (:role_id, :name, :email, :password_hash)');
-            $statement->execute(['role_id' => $roleId, 'name' => $name, 'email' => $email, 'password_hash' => password_hash($password, PASSWORD_DEFAULT)]);
+            $userDao->create($roleId, $name, $email, password_hash($password, PASSWORD_DEFAULT));
             flash('success', 'Usuario creado correctamente.');
             redirect('usuarios.php');
         }
         if ($action === 'toggle') {
             $id = (int) ($_POST['id'] ?? 0);
             if ($id === (int) $user['id']) throw new InvalidArgumentException('No puedes desactivar tu propio usuario.');
-            $statement = $pdo->prepare('UPDATE users SET active = NOT active WHERE id = :id');
-            $statement->execute(['id' => $id]);
+            if (!$userDao->toggleActive($id)) throw new InvalidArgumentException('No se encontró el usuario.');
             flash('success', 'Estado del usuario actualizado.');
             redirect('usuarios.php');
         }
     } catch (PDOException $exception) {
-        $error = $exception->errorInfo[1] === 1062 ? 'Ese email ya está registrado.' : 'No se pudo guardar el usuario.';
-    } catch (Throwable $exception) {
+        error_log($exception->getMessage());
+        $error = isset($exception->errorInfo[1]) && $exception->errorInfo[1] === 1062
+            ? 'Ese email ya está registrado.'
+            : 'No se pudo guardar el usuario.';
+    } catch (InvalidArgumentException $exception) {
         $error = $exception->getMessage();
+    } catch (Throwable $exception) {
+        error_log($exception->getMessage());
+        $error = 'No se pudo completar la operación. Inténtalo nuevamente.';
     }
 }
 
-$roles = $pdo->query('SELECT id, name FROM roles ORDER BY id')->fetchAll();
-$users = $pdo->query('SELECT u.id, u.name, u.email, u.active, r.name AS role FROM users u JOIN roles r ON r.id = u.role_id ORDER BY u.name')->fetchAll();
+$roles = $userDao->listRoles();
+$users = $userDao->all();
 $pageTitle = 'Usuarios';
 $activePage = 'usuarios';
 require __DIR__ . '/includes/header.php';

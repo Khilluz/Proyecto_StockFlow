@@ -1,4 +1,7 @@
 <?php
+use StockFlow\DAO\UsuarioDAO;
+use StockFlow\Services\AuthService;
+
 require_once __DIR__ . '/config/bootstrap.php';
 $error = null;
 if (current_user()) {
@@ -6,21 +9,27 @@ if (current_user()) {
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     verify_csrf();
-    $email = trim($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL) || $password === '') {
+    $emailInput = $_POST['email'] ?? null;
+    $password = $_POST['password'] ?? null;
+    if (!is_string($emailInput) || !is_string($password)
+        || !filter_var(trim($emailInput), FILTER_VALIDATE_EMAIL) || $password === '') {
         $error = 'Ingresa un email y una contraseña válidos.';
     } else {
-        $statement = db()->prepare('SELECT u.id, u.name, u.email, u.password_hash, r.name AS role FROM users u JOIN roles r ON r.id = u.role_id WHERE u.email = :email AND u.active = 1');
-        $statement->execute(['email' => $email]);
-        $user = $statement->fetch();
-        if (!$user || !password_verify($password, $user['password_hash'])) {
-            $error = 'Las credenciales no son correctas.';
-        } else {
-            session_regenerate_id(true);
-            unset($user['password_hash']);
-            $_SESSION['user'] = $user;
-            redirect('dashboard.php');
+        $email = trim($emailInput);
+        try {
+            $user = (new AuthService(new UsuarioDAO(db())))->authenticate($email, $password);
+        } catch (RuntimeException $exception) {
+            error_log($exception->getMessage());
+            $user = null;
+            $error = 'No se pudo completar el inicio de sesión. Inténtalo nuevamente.';
+        }
+        if ($error === null) {
+            if (!$user) {
+                $error = 'Las credenciales no son correctas.';
+            } else {
+                $_SESSION['user'] = $user;
+                redirect('dashboard.php');
+            }
         }
     }
 }
@@ -41,5 +50,5 @@ require __DIR__ . '/includes/header.php';
         <button class="btn btn-primary btn-block" type="submit">Ingresar <span>→</span></button>
     </form>
 </section>
-<aside class="login-aside"><div class="aside-orbit"></div><p class="eyebrow">Tu operación, más clara</p><h2>Decisiones rápidas.<br>Control real.</h2><p>Una vista simple para que cada movimiento cuente.</p><div class="aside-stat"><strong>Acceso seguro</strong><span>Sesiones y roles protegidos</span></div></aside>
+<aside class="login-aside"><div class="aside-orbit"></div><div class="login-brand login-aside-brand"><span class="brand-mark">S</span><span>Stock<span>Flow</span></span></div><p class="eyebrow">Tu operación, más clara</p><h2>Decisiones rápidas.<br>Control real.</h2><p>Una vista simple para que cada movimiento cuente.</p><div class="aside-stat"><strong>Acceso seguro</strong><span>Sesiones y roles protegidos</span></div></aside>
 <?php require __DIR__ . '/includes/footer.php'; ?>

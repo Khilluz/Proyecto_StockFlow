@@ -5,6 +5,6 @@
 <?php else: ?>
     </main>
 <?php endif; ?>
-<script src="assets/js/app.js" defer></script>
+<script src="assets/js/app.js?v=<?= e((string) filemtime(__DIR__ . '/../assets/js/app.js')) ?>" defer></script>
 </body>
 </html>

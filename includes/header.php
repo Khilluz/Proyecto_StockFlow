@@ -11,6 +11,7 @@ $flash = pull_flash();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="StockFlow, gestión operativa para tu negocio">
+    <meta name="csrf-token" content="<?= e(csrf_token()) ?>">
     <title><?= e($pageTitle) ?> | StockFlow</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,6 +37,7 @@ $flash = pull_flash();
         </header>
         <main class="main-content">
     <?php if ($flash): ?><div class="flash flash-<?= e($flash['type']) ?>" role="status"><?= e($flash['message']) ?></div><?php endif; ?>
+        <div id="clientNotice" class="flash" role="status" aria-live="polite" hidden></div>
 <?php else: ?>
     <main class="login-shell">
 <?php endif; ?>
